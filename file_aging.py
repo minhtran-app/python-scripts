@@ -23,7 +23,8 @@ def scan_dir(dir):
             size += size1
         elif os.path.isfile(file):
             last_accessed = os.path.getatime(file)
-            if last_accessed > older_than_in_secs:
+            time_difference = time.time() - last_accessed
+            if time_difference > older_than_in_secs:
                 file_size = os.path.getsize(file)
                 file_size_in_mb = file_size / (1024 * 1024)
                 files_to_review.append([file, time.ctime(last_accessed), f"{file_size_in_mb} MBs"])
